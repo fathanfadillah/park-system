@@ -21,7 +21,7 @@ class LoginController extends Controller
             return view('welcome');
         }
 
-        return back()->withErrors('The provided credentials do not match our records.');
+        return back()->with('error','Invalid email or password');
     }
 
     public function logout(Request $request)
