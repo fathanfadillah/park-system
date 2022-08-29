@@ -17,7 +17,7 @@ class AdminRole
      */
     public function handle(Request $request, Closure $next)
     {
-       if (\Auth::user() && Role::where('id', \Auth::user()->roleId)->first()->name == 'admin') {
+       if (\Auth::user() && Role::where('user_id', \Auth::user()->roleId)->first()->name == 'admin') {
             return $next($request);
        }
 

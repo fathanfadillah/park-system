@@ -17,8 +17,10 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            $role = Auth::user()->roles()->get();
+            $roleName = $role[0]->name;
  
-            return view('welcome');
+            return redirect()->route("$roleName.home");
         }
 
         return back()->with('error','Invalid email or password');
