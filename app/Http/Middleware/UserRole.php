@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\Role;
 
 class UserRole
 {
@@ -16,7 +17,7 @@ class UserRole
      */
     public function handle(Request $request, Closure $next)
     {
-       if (\Auth::user() && Role::where('id', \Auth::user()->roleId)->first()->name == 'user') {
+       if (\Auth::user() && Role::where('user_id', \Auth::user()->roleId)->first()->name == 'user') {
             return $next($request);
        }
 
