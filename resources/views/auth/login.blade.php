@@ -36,6 +36,12 @@
                             <div class="d-grid mx-auto">
                                 <button type="submit" class="btn btn-dark btn-block">Signin</button>
                             </div>
+
+                            @if ($message = Session::get('error'))
+                                <div class="mt-3 alert alert-danger alert-block">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @endif
                         </form>
                     </div>
                 </div>
