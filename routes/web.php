@@ -32,11 +32,11 @@ Route::middleware(['auth'])->group(function () {
         })->name('admin.home');
     });
    
-    // Route::middleware(['user'])->group(function () {
+    Route::middleware(['user'])->group(function () {
         Route::get('user', function () {
             return 'user page';
         })->name('user.home');
-    // });
+    });
 });
 
 
