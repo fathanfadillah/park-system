@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ParkController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('user', function () {
             return view('user.index');
         })->name('user.home');
+        Route::get('park', [ParkController::class, 'index'])->name('park.index');
+        Route::post('park/enter', [ParkController::class, 'enterPark'])->name('park.enter');
     });
 });
 
