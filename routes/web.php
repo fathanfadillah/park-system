@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Middleware\AuthenticateRole;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,13 +27,13 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['admin'])->group(function () {
         Route::get('admin', function () {
-            return 'admin page';
+            return view('admin.index');
         })->name('admin.home');
     });
    
     Route::middleware(['user'])->group(function () {
         Route::get('user', function () {
-            return 'user page';
+            return view('user.index');
         })->name('user.home');
     });
 });
