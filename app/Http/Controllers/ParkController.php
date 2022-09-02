@@ -14,6 +14,10 @@ class ParkController extends Controller
         return view('user.park');
     }
 
+    public function exitParkIndex() {
+        return view('user.exit');
+    }
+
     public function validateEnterPark(Request $request) {
         $error = null;
         $required = $request->validate([
@@ -66,5 +70,33 @@ class ParkController extends Controller
         ]); 
 
         return redirect()->route('user.home');
+    }
+
+    public function exitPark(Request $request) {
+        $park = Park::where('park_code', $request->parkCode)->where('policy_number', $request->policyNumber)->first();
+        if (!$park) {
+            return back()->with('error', '  invalid input park code or policy number');
+        }
+
+        $timeNow = date('Y-m-d H:i:s');
+        $parkHistory = $park->histories()->create([
+            'park_id' => $park->id,
+            'time' => $timeNow,
+            'status' => 'EXIT'
+        ]);
+
+        $duration_time = (time()-strtotime($park->enter_time))/3600;
+        if (is_float($duration_time)) {
+            $duration_time = intval($duration_time) + 1;
+        }
+         
+        $price = $duration_time * 3000;
+
+        $park->update([
+            'price' => $price,
+            'exit_time' => $timeNow,   
+        ]);
+
+        return back()->with('success', "price : Rp $price");
     }
 }

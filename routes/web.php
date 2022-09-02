@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
         })->name('user.home');
         Route::get('park', [ParkController::class, 'index'])->name('park.index');
         Route::post('park/enter', [ParkController::class, 'enterPark'])->name('park.enter');
+        Route::get('park/exit/index', [ParkController::class, 'exitParkIndex'])->name('park.exit.index');
+        Route::post('park/exit', [ParkController::class, 'exitPark'])->name('park.exit.save');
     });
 });
 
