@@ -27,13 +27,13 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['admin'])->group(function () {
-        Route::get('admin', function () {
+        Route::get('admin/home', function () {
             return view('admin.index');
         })->name('admin.home');
     });
    
     Route::middleware(['user'])->group(function () {
-        Route::get('user', function () {
+        Route::get('user/home', function () {
             return view('user.index');
         })->name('user.home');
         Route::get('park', [ParkController::class, 'index'])->name('park.index');
