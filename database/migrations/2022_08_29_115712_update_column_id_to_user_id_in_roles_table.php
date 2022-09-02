@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('roles');
         Schema::create('roles', function (Blueprint $table) {
             $table->id('user_id');
             $table->string('name');
